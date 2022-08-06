@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Abisola CrowdFunding</string>
+    <string name="signup">SignUP</string>
+    <string name="donate">Donate</string>
+    <string name="total_donation">Total Donation</string>
+    <string name="supported_compaigns">Supported Compaigns</string>
+    <string name="welcome">Welcome</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/drawable/bg_card.xml" value="0.1385" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/drawable/buttons_background.xml" value="0.1195" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/drawable/upper_bg_img.xml" value="0.1195" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/activity_all_compaings.xml" value="0.18" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/activity_create_compaign.xml" value="0.1" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/activity_home_page.xml" value="0.22" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/activity_my_compaigns.xml" value="0.1" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/activity_support.xml" value="0.1" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/activity_supported_compaings.xml" value="0.1921875" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/activity_with_draw_amount.xml" value="0.22" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/row_all_compaings.xml" value="0.33" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/row_my_compaings.xml" value="0.25" />
+        <entry key="..\:/Users/BASHIR/AbisolaCrowdFunding/app/src/main/res/layout/row_supported_compaings.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
