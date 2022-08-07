@@ -13,10 +13,16 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AbisolaCrowdFunding"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.RefundSide.RefundActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MySupportedCompaings.view.MySupportedCompaingsActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.withdrawamount.WithDrawAmountActivity"
             android:exported="false" />

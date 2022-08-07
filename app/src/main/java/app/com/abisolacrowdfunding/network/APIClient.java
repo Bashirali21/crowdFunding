@@ -19,7 +19,7 @@ public class APIClient {
                 writeTimeout(10, TimeUnit.MINUTES).
                 addInterceptor(interceptor).build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.250.81/crowfunding/api/User/")
+                .baseUrl("http://192.168.0.104/crowfunding/api/User/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

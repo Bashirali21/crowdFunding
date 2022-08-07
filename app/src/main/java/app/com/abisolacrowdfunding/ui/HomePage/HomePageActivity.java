@@ -9,6 +9,7 @@ import android.view.View;
 
 import app.com.abisolacrowdfunding.R;
 import app.com.abisolacrowdfunding.databinding.ActivityHomePageBinding;
+import app.com.abisolacrowdfunding.ui.MySupportedCompaings.view.MySupportedCompaingsActivity;
 import app.com.abisolacrowdfunding.ui.SupportedCompaings.ui.SupportedCompaingsActivity;
 import app.com.abisolacrowdfunding.ui.allcompaigns.ui.AllCompaingsActivity;
 import app.com.abisolacrowdfunding.ui.createcompaign.view.CreateCompaignActivity;
@@ -52,6 +53,12 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomePageActivity.this, SupportedCompaingsActivity.class));
+            }
+        });
+        binding.cardMySupportedCompaings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomePageActivity.this, MySupportedCompaingsActivity.class));
             }
         });
     }
