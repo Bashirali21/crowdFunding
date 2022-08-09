@@ -31,15 +31,16 @@ ActivityCreateCompaignBinding binding;
         setContentView(binding.getRoot());
         onClicks();
     }
+    //this function is called when we click any buttons on the create compaign
     public void onClicks(){
         binding.btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isEmpty(binding.EtTitle)||isEmpty(binding.description)){
+                if(isEmpty(binding.EtTitle)||isEmpty(binding.description)){//for checking whether any field is empty of not
                     Toast.makeText(CreateCompaignActivity.this, "please fill all the data", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    SharedPreferences sharedPreferences = getSharedPreferences("loginUser", MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getSharedPreferences("loginUser", MODE_PRIVATE);//getting current login user id
 
                     CreateCompaign(sharedPreferences.getInt("id", 99));
                 }
@@ -48,6 +49,7 @@ ActivityCreateCompaignBinding binding;
     }
 
     private void CreateCompaign(int id) {
+        //here we are just calling the createcompaign function which we define in the api service and send data of form to it
         ApiService apiService = APIClient.getClient().create(ApiService.class);
         apiService.createCompaign(new CompaignFormData(binding.EtTitle.getText().toString(),id,binding.description.getText().toString())).enqueue(new Callback<SignUpResponse>() {
             @Override
@@ -70,10 +72,11 @@ ActivityCreateCompaignBinding binding;
             }
         });
     }
-
+// this function is used to check whether field is empty or not
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
+    // this is for showing dialog
     public void ShowDialog(){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateCompaignActivity.this);
         builder1.setMessage("Successfully Added");

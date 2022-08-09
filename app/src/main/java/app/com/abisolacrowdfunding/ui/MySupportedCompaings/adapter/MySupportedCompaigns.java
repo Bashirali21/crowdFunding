@@ -52,6 +52,16 @@ public class MySupportedCompaigns extends RecyclerView.Adapter<MySupportedCompai
     public void onBindViewHolder(@NonNull View_Holder holder, int position) {
         MySuppotedResponse currentItem = users.get(position);
         holder.title.setText(users.get(position).getTitle());
+        holder.Amount.setText(users.get(position).getAmount()+"");
+        int status=users.get(position).getStatus();
+        if(status==5){
+          holder.refund.setVisibility(View.GONE);
+        }
+        else{
+            holder.refund.setVisibility(View.VISIBLE);
+        }
+
+
     }
 
     @Override
@@ -60,13 +70,14 @@ public class MySupportedCompaigns extends RecyclerView.Adapter<MySupportedCompai
     }
 
     class View_Holder extends RecyclerView.ViewHolder {
-        TextView title;
+        TextView title,Amount;
         Button refund;
 
         public View_Holder(@NonNull View itemView, final MySupportedCompaigns.OnitemClickListener listener) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.tvMySupportedCompaignTitle);
             refund = itemView.findViewById(R.id.btnRefund);
+            Amount=itemView.findViewById(R.id.tvDonated);
             refund.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

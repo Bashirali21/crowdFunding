@@ -1,7 +1,7 @@
 package app.com.abisolacrowdfunding.ui.allcompaigns.model;
 
 import com.google.gson.annotations.SerializedName;
-
+//model is the tha data we are getting from api or we are sending to api
 public class AllComaignsResponse {
     public AllComaignsResponse(int compaign_id, String compaign_title, String compaign_description, String user_fname) {
         this.compaign_id = compaign_id;

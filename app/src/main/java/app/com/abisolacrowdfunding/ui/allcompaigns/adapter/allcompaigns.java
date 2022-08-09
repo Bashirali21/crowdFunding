@@ -20,12 +20,12 @@ import java.util.Random;
 
 import app.com.abisolacrowdfunding.R;
 import app.com.abisolacrowdfunding.ui.allcompaigns.model.AllComaignsResponse;
-
+//adapter is a class which we used to show list of data for example this adapter is used to show all the compaings in the project
 public class allcompaigns extends RecyclerView.Adapter<allcompaigns.View_Holder> {
     private allcompaigns.OnitemClickListener mListener;
 
     public interface OnitemClickListener {
-        void OnItemClick(int position);
+        void OnItemClick(int position);//
 
         void onaddclick(int position);
 
@@ -47,14 +47,14 @@ public class allcompaigns extends RecyclerView.Adapter<allcompaigns.View_Holder>
     @NonNull
     @Override
     public View_Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.row_all_compaings, parent, false);
+        View view = layoutInflater.inflate(R.layout.row_all_compaings, parent, false);//here we define what view is our adapter showing here we are showing row_all_compaings view which you can see in res->layout
         return new View_Holder(view, mListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull View_Holder holder, int position) {
         AllComaignsResponse currentItem = users.get(position);
-        holder.title.setText(users.get(position).getCompaign_title());
+        holder.title.setText(users.get(position).getCompaign_title());//here we are defining our data what we have to show it is coming from tha api
         holder.description.setText(users.get(position).getCompaign_description());
         holder.createdBy.setText(users.get(position).getUser_fname());
         holder.date.setText(users.get(position).getDate());
@@ -72,6 +72,7 @@ public class allcompaigns extends RecyclerView.Adapter<allcompaigns.View_Holder>
 
         public View_Holder(@NonNull View itemView, final allcompaigns.OnitemClickListener listener) {
             super(itemView);
+            //here we are initializing our components that were in the roww_all_views
             title = (TextView) itemView.findViewById(R.id.tvCompaignTitle);
             description = (TextView) itemView.findViewById(R.id.tvDescription);
             createdBy = (TextView) itemView.findViewById(R.id.tvCompaignCreaterName);
@@ -85,6 +86,18 @@ public class allcompaigns extends RecyclerView.Adapter<allcompaigns.View_Holder>
                         if (position != RecyclerView.NO_POSITION) {
 
                             listener.onaddclick(position);
+                        }
+                    }
+                }
+            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+
+                            listener.OnItemClick(position);
                         }
                     }
                 }

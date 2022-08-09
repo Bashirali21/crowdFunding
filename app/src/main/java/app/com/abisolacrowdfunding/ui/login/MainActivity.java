@@ -29,6 +29,7 @@ ActivityMainBinding binding;
         onCLicks();//onClicks function
 
     }
+    //called when we click buttons on our login page
     public void onCLicks(){
         binding.tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +40,7 @@ ActivityMainBinding binding;
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //for cheking any field is empty or not
                 if(isEmpty(binding.EtEmail)||isEmpty(binding.etPass)){
                     Toast.makeText(MainActivity.this, "please fill all the data", Toast.LENGTH_SHORT).show();
                 }
@@ -59,16 +61,20 @@ ActivityMainBinding binding;
                 binding.progressBar3.setVisibility(View.GONE);
                 if(response.isSuccessful()){
                     if(response.body().isSuccessfull){
+                        //after the succesfull login we are just saving our user info in a session
                         SharedPreferences saveinfo=getSharedPreferences("loginUser",MODE_PRIVATE);//for saving user information on a sucessfull login
                         SharedPreferences.Editor edit=saveinfo.edit();
                         edit.putInt("id",response.body().user.UserId);
                         edit.putString("name",response.body().user.FirstName);
                         edit.apply();
+                        Toast.makeText(MainActivity.this, "Login Succesfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(MainActivity.this, HomePageActivity.class));
                     }
                     else{
                         Toast.makeText(MainActivity.this, response.body().message+"", Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    Toast.makeText(MainActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
                 }
             }
 

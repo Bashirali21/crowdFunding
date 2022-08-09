@@ -63,6 +63,7 @@ public class MyCompaignsActivity extends AppCompatActivity {
                                 if (list.get(position).getStatus() == 1) {
                                     Intent i = new Intent(MyCompaignsActivity.this, WithDrawAmountActivity.class);
                                     i.putExtra("cid", list.get(position).getCompaign_id());//for sending compaings id to withdraw amount actitivity
+                                    i.putExtra("uid",id);
                                     startActivity(i);
 
 
