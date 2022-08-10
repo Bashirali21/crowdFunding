@@ -51,7 +51,8 @@ public class AllSupportCompaings extends RecyclerView.Adapter<AllSupportCompaing
     public void onBindViewHolder(@NonNull View_Holder holder, int position) {
         SupportedResponse currentItem = users.get(position);
         holder.title.setText(users.get(position).getCompaign_title());
-        holder.date.setText(users.get(position).getCompaign_date_created());
+        holder.amount.setText(users.get(position).getWithdrawl_amount()+"");
+        holder.description.setText(users.get(position).getwithdrawl_discription());
     }
 
     @Override
@@ -60,13 +61,14 @@ public class AllSupportCompaings extends RecyclerView.Adapter<AllSupportCompaing
     }
 
     class View_Holder extends RecyclerView.ViewHolder {
-        TextView title, date;
+        TextView title, amount,description;
         Button accept, reject;
 
         public View_Holder(@NonNull View itemView, final AllSupportCompaings.OnitemClickListener listener) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.tvSupportedCompaignTitle);
-            date = (TextView) itemView.findViewById(R.id.tvSupportedCompaignDate);
+            amount = (TextView) itemView.findViewById(R.id.tvRequestedAmount);
+            description=itemView.findViewById(R.id.tvDescriptionRequest);
             accept = itemView.findViewById(R.id.btnAccept);
             reject = itemView.findViewById(R.id.btnReject);
             accept.setOnClickListener(new View.OnClickListener() {

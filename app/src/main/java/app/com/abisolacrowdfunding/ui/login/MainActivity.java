@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import app.com.abisolacrowdfunding.databinding.ActivityMainBinding;
 import app.com.abisolacrowdfunding.network.APIClient;
@@ -67,21 +71,30 @@ ActivityMainBinding binding;
                         edit.putInt("id",response.body().user.UserId);
                         edit.putString("name",response.body().user.FirstName);
                         edit.apply();
-                        Toast.makeText(MainActivity.this, "Login Succesfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this, HomePageActivity.class));
+                       ShowMessage("Login Succesfully");
+                        final Handler handler = new Handler(Looper.getMainLooper());
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(MainActivity.this, HomePageActivity.class));
+                            }
+                        }, 1000);
+
                     }
                     else{
-                        Toast.makeText(MainActivity.this, response.body().message+"", Toast.LENGTH_SHORT).show();
+                        ShowMessage(response.body().message+"");
+
                     }
                 }else{
-                    Toast.makeText(MainActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
+                    ShowMessage("Wrong email or password");
+
                 }
             }
 
             @Override
             public void onFailure(Call<SignUpResponse> call, Throwable t) {
                 binding.progressBar3.setVisibility(View.GONE);
-                Toast.makeText(MainActivity.this, t.getMessage()+"", Toast.LENGTH_SHORT).show();
+                ShowMessage("server error");
             }
         });
 
@@ -91,4 +104,9 @@ ActivityMainBinding binding;
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
+    public  void ShowMessage(String message) {
+        Snackbar snackbar = Snackbar.make(binding.getRoot(), message, Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
 }

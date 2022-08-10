@@ -3,12 +3,12 @@ package app.com.abisolacrowdfunding.ui.SupportedCompaings.mode;
 import com.google.gson.annotations.SerializedName;
 
 public class SupportedResponse {
-    public int getdonation_reference() {
-        return donation_reference;
+    public int getwithdrawl_reference() {
+        return withdrawl_reference;
     }
 
-    public void setdonation_reference(int donation_reference) {
-        this.donation_reference = donation_reference;
+    public void setwithdrawl_reference(int withdrawl_reference) {
+        this.withdrawl_reference = withdrawl_reference;
     }
 
     public String getCompaign_title() {
@@ -19,19 +19,30 @@ public class SupportedResponse {
         this.compaign_title = compaign_title;
     }
 
-    public String getCompaign_date_created() {
-        return compaign_date_created;
+    public String getwithdrawl_discription() {
+        return withdrawl_discription;
     }
 
-    public void setCompaign_date_created(String compaign_date_created) {
-        this.compaign_date_created = compaign_date_created;
+    public void setwithdrawl_discription(String withdrawl_discription) {
+        this.withdrawl_discription = withdrawl_discription;
     }
 
-    @SerializedName("donation_reference")
-    public int donation_reference;
+    @SerializedName("withdrawl_reference")
+    public int withdrawl_reference;
+
+    public int getWithdrawl_amount() {
+        return withdrawl_amount;
+    }
+
+    public void setWithdrawl_amount(int withdrawl_amount) {
+        this.withdrawl_amount = withdrawl_amount;
+    }
+
+    @SerializedName("withdrawl_amount")
+    public int withdrawl_amount;
     @SerializedName("compaign_title")
     public String compaign_title;
-    @SerializedName("compaign_date_created")
-    public String compaign_date_created;
+    @SerializedName("withdrawl_discription")
+    public String withdrawl_discription;
 
 }

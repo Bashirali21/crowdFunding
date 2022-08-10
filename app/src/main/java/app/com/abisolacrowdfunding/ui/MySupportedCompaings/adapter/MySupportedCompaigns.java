@@ -54,7 +54,7 @@ public class MySupportedCompaigns extends RecyclerView.Adapter<MySupportedCompai
         holder.title.setText(users.get(position).getTitle());
         holder.Amount.setText(users.get(position).getAmount()+"");
         int status=users.get(position).getStatus();
-        if(status==5){
+        if(status==1){
           holder.refund.setVisibility(View.GONE);
         }
         else{

@@ -59,9 +59,12 @@ public interface ApiService {
     @GET("approveDisaproveWithDrawal")
     Call<SignUpResponse> approveDisapproveCompaign(
             @Query("status") Boolean status,
-            @Query("donation_reference") int donation_reference
+            @Query("withdrawl_reference") int withdrawl_reference,
+            @Query("userId") int userId
+
+
     );
-    @POST("withDrawAmount")
+    @POST("requestWithdraw")
     Call<SignUpResponse> withDrawAmount(
             @Body WithDrawlRequestData data
             );
@@ -74,9 +77,7 @@ public interface ApiService {
     @GET("refundRequest")
     Call<SignUpResponse> refund(
             @Query("userId") int status,
-            @Query("donationId") int cId,
-            @Query("compaignId") int compaignId,
-            @Query("amount") int amount
+            @Query("donationId") int cId
     );
 
     @GET("compaignDetail")

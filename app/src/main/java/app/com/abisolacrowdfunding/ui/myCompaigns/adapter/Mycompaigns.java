@@ -50,7 +50,7 @@ public class Mycompaigns extends RecyclerView.Adapter<Mycompaigns.View_Holder> {
         MyComaignsResponse currentItem = users.get(position);
         holder.title.setText(users.get(position).getCompaign_title());
         holder.tvDonation.setText(users.get(position).getAmount()+"");
-        holder.progressBar.setProgress((int) users.get(position).getPercentage());
+
     }
 
     @Override
@@ -68,7 +68,6 @@ public class Mycompaigns extends RecyclerView.Adapter<Mycompaigns.View_Holder> {
             title = (TextView) itemView.findViewById(R.id.tvMyCompaignTitle);
             tvDonation = (TextView) itemView.findViewById(R.id.tvTotalDonation);
             withDraw=itemView.findViewById(R.id.btnWithDraw);
-            progressBar=itemView.findViewById(R.id.progressBar);
             withDraw.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

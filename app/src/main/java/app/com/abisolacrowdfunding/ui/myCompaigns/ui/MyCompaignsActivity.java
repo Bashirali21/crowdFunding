@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -45,13 +46,17 @@ public class MyCompaignsActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("loginUser", MODE_PRIVATE);
         getCompaigns(sharedPreferences.getInt("id", 99));
     }
-//for getting compaigns
+
+    //for getting compaigns
     public void getCompaigns(int id) {
         apiService = APIClient.getClient().create(ApiService.class);
         apiService.mYCompaings(id).enqueue(new Callback<List<MyComaignsResponse>>() {
             @Override
             public void onResponse(Call<List<MyComaignsResponse>> call, Response<List<MyComaignsResponse>> response) {
                 if (response.isSuccessful()) {
+                    if(response.body()==null){
+                        binding.textView11.setVisibility(View.VISIBLE);
+                    }
                     if (response.body() != null) {
                         list = response.body();
                         binding.recMyCompaings.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -60,16 +65,11 @@ public class MyCompaignsActivity extends AppCompatActivity {
                         adapter.setOnItemClick(new Mycompaigns.OnitemClickListener() {
                             @Override
                             public void onWithDrawClick(int position) {
-                                if (list.get(position).getStatus() == 1) {
-                                    Intent i = new Intent(MyCompaignsActivity.this, WithDrawAmountActivity.class);
-                                    i.putExtra("cid", list.get(position).getCompaign_id());//for sending compaings id to withdraw amount actitivity
-                                    i.putExtra("uid",id);
-                                    startActivity(i);
-
-
-                                } else {
-                             ShowDialog(list.get(position).getCompaign_id());
-                                }
+                                Intent i = new Intent(MyCompaignsActivity.this, WithDrawAmountActivity.class);
+                                i.putExtra("cid", list.get(position).getCompaign_id());//for sending compaings id to withdraw amount actitivity
+                                i.putExtra("uid", id);
+                                i.putExtra("amount", list.get(position).getAmount());
+                                startActivity(i);
                             }
                         });
                     }
@@ -84,40 +84,6 @@ public class MyCompaignsActivity extends AppCompatActivity {
             }
         });
     }
-    public void ShowDialog(int Id){
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(MyCompaignsActivity.this);
-        builder1.setTitle("Percentage Low");
-        builder1.setMessage("Your percentage is low  Do you want to send request");
-        builder1.setCancelable(false);
-        builder1.setPositiveButton(
-                "ok",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                       sendWithdrawRequest(Id);
-                    }
-                });
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
-    }
 
-    //for calling sendWithDrawRequest api
-    public void sendWithdrawRequest(int id){
-        apiService.sendWithDrawRequest(id).enqueue(new Callback<SignUpResponse>() {
-            @Override
-            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                if (response.body().isSuccessfull) {
-                    if (response.body().isSuccessfull) {
-                        Toast.makeText(MyCompaignsActivity.this, "request sended", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(MyCompaignsActivity.this, response.body().message+"", Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                Toast.makeText(MyCompaignsActivity.this, t.getMessage() + "", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }

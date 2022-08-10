@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import app.com.abisolacrowdfunding.databinding.ActivitySignUpBinding;
 import app.com.abisolacrowdfunding.network.APIClient;
@@ -37,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (isEmpty(binding.tvEnterFirstName) || isEmpty(binding.EtLastName)|| isEmpty(binding.EtEmail) || isEmpty(binding.EtAddress)||isEmpty(binding.EtPassword)) {//checking whether edit text is empty or not
-                    Toast.makeText(SignUpActivity.this, "please fill all data", Toast.LENGTH_SHORT).show();
+                    ShowMessage("please fill all data");
 
                 } else {
 
@@ -59,20 +63,26 @@ public class SignUpActivity extends AppCompatActivity {
                 binding.progressBar2.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessfull) {
-                        Toast.makeText(SignUpActivity.this, "Sign Up Succesfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                      ShowMessage("SignUp Succesfully");
+                        final Handler handler = new Handler(Looper.getMainLooper());
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                            }
+                        }, 1000);
                     }
                     else{
-                        Toast.makeText(SignUpActivity.this, response.body().message+"", Toast.LENGTH_SHORT).show();
+                        ShowMessage(response.body().message+"");
                     }
                 } else {
-                    Toast.makeText(SignUpActivity.this, "something went wrong", Toast.LENGTH_SHORT).show();
+                    ShowMessage("Something went wrong Server Error");
                 }
             }
 
             @Override
             public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                Toast.makeText(SignUpActivity.this, t + "", Toast.LENGTH_SHORT).show();
+                ShowMessage("Something went wrong Server Error");
                 binding.progressBar2.setVisibility(View.GONE);
 
             }
@@ -82,6 +92,9 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
-
+    public  void ShowMessage(String message) {
+        Snackbar snackbar = Snackbar.make(binding.getRoot(), message, Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
 
 }

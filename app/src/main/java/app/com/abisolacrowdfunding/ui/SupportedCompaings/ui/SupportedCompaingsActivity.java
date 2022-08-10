@@ -1,11 +1,14 @@
 package app.com.abisolacrowdfunding.ui.SupportedCompaings.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ import app.com.abisolacrowdfunding.network.ApiService;
 import app.com.abisolacrowdfunding.ui.HomePage.HomePageActivity;
 import app.com.abisolacrowdfunding.ui.SupportedCompaings.adapter.AllSupportCompaings;
 import app.com.abisolacrowdfunding.ui.SupportedCompaings.mode.SupportedResponse;
+import app.com.abisolacrowdfunding.ui.createcompaign.view.CreateCompaignActivity;
 import app.com.abisolacrowdfunding.ui.myCompaigns.adapter.Mycompaigns;
 import app.com.abisolacrowdfunding.ui.signup.model.SignUpResponse;
 import retrofit2.Call;
@@ -49,6 +53,9 @@ public class SupportedCompaingsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<SupportedResponse>> call, Response<List<SupportedResponse>> response) {
                 if (response.isSuccessful()) {
+                    if(response.body().size()==0){
+                        binding.textView5.setVisibility(View.VISIBLE);
+                    }
                     if (response.body() != null) {
                         list = response.body();
                         binding.recSupportedCompaings.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -57,12 +64,12 @@ public class SupportedCompaingsActivity extends AppCompatActivity {
                         adapter.setOnItemClick(new AllSupportCompaings.OnitemClickListener() {
                             @Override
                             public void onAccept(int position) {
-                                callApprovedFuntion(true, list.get(position).getdonation_reference());//
+                                callApprovedFuntion(true, list.get(position).getwithdrawl_reference());//
                             }
 
                             @Override
                             public void onReject(int position) {
-                                callApprovedFuntion(false, list.get(position).getdonation_reference());
+                                callApprovedFuntion(false, list.get(position).getwithdrawl_reference());
                             }
                         });
                     }
@@ -84,22 +91,20 @@ public class SupportedCompaingsActivity extends AppCompatActivity {
         Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
     }
 
-    public void success() {
-        Toast.makeText(this, "succesfull", Toast.LENGTH_SHORT).show();
-    }
 //for calling api approve function
     public void callApprovedFuntion(Boolean status, int donation_reference) {
-        apiService.approveDisapproveCompaign(status, donation_reference).enqueue(new Callback<SignUpResponse>() {
+        apiService.approveDisapproveCompaign(status, donation_reference,userId).enqueue(new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessfull) {
-                        startActivity(new Intent(SupportedCompaingsActivity.this, HomePageActivity.class));
-                        finish();
+                     ShowDialog();
                     }
 
                 }
-                errorMessage();
+                else {
+                    errorMessage();
+                }
             }
 
             @Override
@@ -108,5 +113,20 @@ public class SupportedCompaingsActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void ShowDialog(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(SupportedCompaingsActivity.this);
+        builder1.setMessage("Operation Succesfull");
+        builder1.setCancelable(false);
+        builder1.setPositiveButton(
+                "ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(new Intent(SupportedCompaingsActivity.this, HomePageActivity.class));
+                        finish();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 }

@@ -20,8 +20,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:paddingBottom="@dimen/_10sdp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/_10sdp">
 
             <TextView
                 android:id="@+id/tvSupportedCompaignTitle"
@@ -34,40 +34,37 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvCreatedBy"
+                android:id="@+id/tvDescriptionRequest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="createdOn:"
+                android:text="Desdf"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvSupportedCompaignTitle"
                 app:layout_constraintTop_toBottomOf="@+id/tvSupportedCompaignTitle" />
 
             <TextView
-                android:id="@+id/tvSupportedCompaignDate"
+                android:id="@+id/tvRequestedAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ali ahmed"
-                app:layout_constraintStart_toEndOf="@+id/tvCreatedBy"
-                app:layout_constraintTop_toTopOf="@+id/tvCreatedBy" />
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="@+id/tvDescriptionRequest"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescriptionRequest" />
 
             <Button
                 android:id="@+id/btnAccept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Accept"
                 android:backgroundTint="#4CAF50"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Accept"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tvCreatedBy"
-                app:layout_constraintTop_toBottomOf="@+id/tvCreatedBy" />
+                app:layout_constraintStart_toStartOf="@+id/tvRequestedAmount"
+                app:layout_constraintTop_toBottomOf="@+id/tvRequestedAmount" />
 
             <Button
                 android:id="@+id/btnReject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reject"
-                android:layout_marginLeft="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/btnAccept"
                 app:layout_constraintStart_toEndOf="@+id/btnAccept"
                 app:layout_constraintTop_toTopOf="@+id/btnAccept" />
